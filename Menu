@@ -1,0 +1,175 @@
+package View;
+
+import javax.swing.*;
+
+import java.awt.event.*;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.ParseException;
+
+public class Menu extends JFrame implements ActionListener{
+	
+	//Variables de Pantalla
+	private JLabel Title, Lbl_Placa, Lbl_Hora, Lbl_Fecha;
+	private	JButton Bto_Search, Bto_Exit;
+	private	JTextField Txt_Placa, Txt_Fecha, Txt_Hora; 
+	
+	//Variable de Programa
+	private JLabel Output;
+	private int n;
+	private char digito;
+	Date date, date1, date2, date3, date4;
+	
+	File Archivo = new File("C://Program Files//archivo.txt");
+    Formatter nuevoArchivo;
+    Scanner x;
+    
+    
+	public Menu() {
+		
+		setLayout (null);
+		Title = new JLabel("Pico Placa");
+		Title.setBounds(135, 20, 70, 30);
+		add(Title);
+		Lbl_Placa = new JLabel("Placa: ");
+		Lbl_Placa.setBounds(40, 90, 50, 30);
+		add(Lbl_Placa);
+		Txt_Placa = new JTextField ();
+		Txt_Placa.setBounds(110, 90, 150, 30);
+		add(Txt_Placa);
+		Lbl_Fecha = new JLabel("Fecha: ");
+		Lbl_Fecha.setBounds(40, 130, 50, 30);
+		add(Lbl_Fecha);
+		Txt_Fecha = new JTextField ();
+		Txt_Fecha.setBounds(110, 130, 150, 30);
+		add(Txt_Fecha);
+		Lbl_Hora = new JLabel("Hora: ");
+		Lbl_Hora.setBounds(40, 170, 50, 30);
+		add(Lbl_Hora);
+		Txt_Hora = new JTextField ();
+		Txt_Hora.setBounds(110, 170, 150, 30);
+		add(Txt_Hora);
+		Bto_Search = new JButton("Buscar");
+		Bto_Search.setBounds(60, 230, 80, 30);
+		Bto_Search.setVisible(true);
+		add(Bto_Search);
+		Bto_Search.addActionListener(this);
+		Bto_Exit = new JButton("Salir");
+		Bto_Exit.setBounds(160, 230, 80, 30);
+		Bto_Exit.setVisible(true);
+		add(Bto_Exit);
+		Bto_Exit.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		if(e.getSource()==Bto_Exit){
+			
+			System.exit(0);
+			
+	    }else{
+			
+			if(e.getSource()==Bto_Search){
+				
+				String placa = Txt_Placa.getText();
+				String fecha = Txt_Fecha.getText();
+				String hora  = Txt_Hora.getText();
+				fecha = fecha.toUpperCase();
+				n = placa.length();
+				digito = placa.charAt(n-1);
+				
+				String time1 = "07:00:00";
+				String time2 = "09:30:00";
+				String time3 = "16:00:00";
+				String time4 = "19:30:00";
+				
+				DateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+		        try
+		        {
+		        	
+		          date = sdf.parse(hora);
+			      date1 = sdf.parse(time1);
+			      date2 = sdf.parse(time2);
+			      date3 = sdf.parse(time3);
+			      date4 = sdf.parse(time4);
+			      
+		        } catch (Exception e1){
+		            e1.printStackTrace();
+		        }
+		        
+				if ( (date.compareTo(date1) >= 0 && date.compareTo(date2) <= 0) ||
+				     (date.compareTo(date3) >= 0 && date.compareTo(date4) <= 0) ){
+					System.out.println("Pasa por aqui" +fecha);
+					switch (fecha) {
+					case "LUNES" :
+						if(digito == '1' || digito == '2' ){
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "No Disponible para Transitar");
+						}else{
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+						}
+						break;
+					case "MARTES" :
+						if(digito == '3' || digito == '4' ){
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "No Disponible para Transitar");
+						}else{
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+						}
+						break;
+					case "MIERCOLES" :
+						if(digito == '5' || digito == '6' ){
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "No Disponible para Transitar");
+						}else{
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+						}
+						break;
+					case "JUEVES" :
+						if(digito == '7' || digito == '8' ){
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "No Disponible para Transitar");
+						}else{
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+						}
+						break;
+					case "VIERNES" :
+						if(digito == '9' || digito == '0' ){
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "No Disponible para Transitar");
+						}else{
+							JFrame parent = new JFrame();
+						    JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+						}
+						break;
+						
+					default:
+						JFrame parent = new JFrame();
+						JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+						break;
+					}
+				}else{
+					JFrame parent = new JFrame();
+					JOptionPane.showMessageDialog(parent, "Disponible para Transitar");
+				}
+				
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args ){
+		Menu Ventana = new Menu();
+		Ventana.setBounds(10, 20, 350, 350);
+		Ventana.setVisible(true);
+		Ventana.setResizable(false);
+		
+	}
+}
